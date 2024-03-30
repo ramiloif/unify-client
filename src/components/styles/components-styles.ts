@@ -42,7 +42,7 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
   lineHeight: 1.2, // Adjust line height for better text flow
 }));
 
-const StyledList = styled(List)(({ theme }) => ({
+const StyledList = styled(List)(({}) => ({
   display: "flex",
   flexWrap: "wrap",
   justifyContent: "center",

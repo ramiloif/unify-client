@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { CreatePlaylistDto } from "../dto/create-playlist-dto";
 import { UserContext } from "../user-context";

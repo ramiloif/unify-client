@@ -7,7 +7,6 @@ import Home from "./components/home";
 import Welcome from "./components/sign-up";
 import { UserProvider } from "./user-context";
 import Playlist from "./components/playlist";
-import SearchSong from "./components/search-song";
 
 function App() {
   return (
