@@ -70,12 +70,8 @@ const SearchSong: FC<SearchSongProps> = ({ addTrack, onSearch }) => {
   }, [songSelected]);
 
   const handleClickAway = () => {
-    if (songSelected) {
-      onSearch(true);
-    } else {
-      onSearch(false);
-      setSuggestions([]);
-    }
+    onSearch(false);
+    setSuggestions([]);
     setSongSelected(null); // Reset songSelected state
   };
   const renderOption = (
@@ -119,28 +115,31 @@ const SearchSong: FC<SearchSongProps> = ({ addTrack, onSearch }) => {
   return (
     <div>
       <StyledTypography variant="h6">Find your favorite songs</StyledTypography>
-      <Autocomplete
-        id="search-autocomplete"
-        options={suggestions}
-        getOptionLabel={(option) => option.name}
-        renderInput={(params) => (
-          <ClickAwayListener onClickAway={handleClickAway}>
-            <TextField
-              {...params}
-              label="Search for a song"
-              onChange={(e) => setQuery(e.target.value)}
-              sx={{
-                "& .MuiAutocomplete-inputRoot": {
-                  backgroundColor: "white",
-                  color: "black",
-                },
-                width: 400,
-              }}
-            />
-          </ClickAwayListener>
-        )}
-        renderOption={renderOption}
-      />
+      <ClickAwayListener onClickAway={handleClickAway}>
+        <div>
+          <Autocomplete
+            id="search-autocomplete"
+            options={suggestions}
+            getOptionLabel={(option) => option.name}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Search for a song"
+                onChange={(e) => setQuery(e.target.value)}
+                sx={{
+                  "& .MuiAutocomplete-inputRoot": {
+                    backgroundColor: "white",
+                    color: "black",
+                  },
+                  maxWidth: 400,
+                }}
+                
+              />
+            )}
+            renderOption={renderOption}
+          />
+        </div>
+      </ClickAwayListener>
     </div>
   );
 };
