@@ -7,9 +7,28 @@ import Home from "./components/home";
 import Welcome from "./components/sign-up";
 import { UserProvider } from "./user-context";
 import Playlist from "./components/playlist";
+import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+
+const theme = createTheme({
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: `
+        html, body, #root {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          width: 100%;
+          height: 100%;
+        }
+      `,
+    },
+  },
+});
 
 function App() {
   return (
+    <ThemeProvider theme={theme}>
+    <CssBaseline/>
     <BrowserRouter>
       <UserProvider>
         <Routes>
@@ -21,6 +40,7 @@ function App() {
         </Routes>
       </UserProvider>
     </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
