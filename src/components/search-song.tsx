@@ -1,6 +1,10 @@
 import { FC, HTMLAttributes, useContext, useEffect, useState } from "react";
 import { UserContext } from "../user-context";
-import { StyledImage, StyledTypography } from "./styles/components-styles";
+import {
+  StyledTypography,
+  Styled1LinesOverflowTypography,
+  Styled2LinesOverflowTypography,
+} from "./styles/components-styles";
 import { SpotifyTrackInfo } from "../constants/spotify";
 import {
   Autocomplete,
@@ -8,6 +12,7 @@ import {
   ClickAwayListener,
   Paper,
   TextField,
+  Tooltip,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { searchSpotifyTrack } from "../api/spotify";
@@ -81,34 +86,43 @@ const SearchSong: FC<SearchSongProps> = ({ addTrack, onSearch }) => {
     <Paper
       elevation={3}
       style={{
+        height: "110px",
         padding: "20px",
         display: "flex",
-        flexDirection: "row",
         alignItems: "center",
       }}
     >
-      <StyledImage
-        src={track.album.images[0].url}
-        style={{ maxWidth: "60px", marginRight: "10px" }}
-      />
       <div style={{ flex: 1 }}>
-        <StyledTypography variant="subtitle1">{track.name}</StyledTypography>
-        <StyledTypography variant="subtitle2">
-          {track.artists[0].name}
-        </StyledTypography>
-        <StyledTypography variant="subtitle2">
-          {track.album.name}
-        </StyledTypography>
+        <Tooltip title={track.name}>
+          <Styled2LinesOverflowTypography variant="subtitle1">
+            {track.name}
+          </Styled2LinesOverflowTypography>
+        </Tooltip>
+
+        <Tooltip title={track.artists[0].name}>
+          <Styled1LinesOverflowTypography variant="subtitle2">
+            {track.artists[0].name}
+          </Styled1LinesOverflowTypography>
+        </Tooltip>
+
+        <Tooltip title={track.album.name}>
+          <Styled1LinesOverflowTypography variant="subtitle2">
+            {track.album.name}
+          </Styled1LinesOverflowTypography>
+        </Tooltip>
       </div>
-      <Button
-        onClick={() => {
-          setSongSelected(track);
-        }}
-        variant="contained"
-        color="primary"
-      >
-        <AddIcon />
-      </Button>
+      <div>
+        <Button
+          onClick={() => {
+            setSongSelected(track);
+          }}
+          variant="contained"
+          color="primary"
+          style={{ marginRight: "10px", marginLeft: "10px" }} // Set width and add margin-right
+        >
+          <AddIcon />
+        </Button>
+      </div>
     </Paper>
   );
 
@@ -120,6 +134,7 @@ const SearchSong: FC<SearchSongProps> = ({ addTrack, onSearch }) => {
           <Autocomplete
             id="search-autocomplete"
             options={suggestions}
+            noOptionsText=""
             getOptionLabel={(option) => option.name}
             renderInput={(params) => (
               <TextField
@@ -131,9 +146,9 @@ const SearchSong: FC<SearchSongProps> = ({ addTrack, onSearch }) => {
                     backgroundColor: "white",
                     color: "black",
                   },
+                  //width: "100%",
                   maxWidth: 400,
                 }}
-                
               />
             )}
             renderOption={renderOption}

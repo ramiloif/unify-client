@@ -42,6 +42,22 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
   lineHeight: 1.2, // Adjust line height for better text flow
 }));
 
+const Styled2LinesOverflowTypography = styled(StyledTypography)(({}) => ({
+  display: "-webkit-box",
+  WebkitBoxOrient: "vertical",
+  WebkitLineClamp: 2, // Limit to 2 lines
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+}));
+
+const Styled1LinesOverflowTypography = styled(StyledTypography)(({}) => ({
+  display: "-webkit-box",
+  WebkitBoxOrient: "vertical",
+  WebkitLineClamp: 1, // Limit to 1 lines
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+}));
+
 const StyledList = styled(List)(({}) => ({
   display: "flex",
   flexWrap: "wrap",
@@ -142,6 +158,8 @@ export {
   StyledContainer,
   StyledCard,
   StyledTypography,
+  Styled1LinesOverflowTypography,
+  Styled2LinesOverflowTypography,
   StyledList,
   StyledListItem,
   StyledImage,

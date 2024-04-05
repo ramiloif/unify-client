@@ -6,7 +6,7 @@ import StyledVoteIconButton, {
   RightIconButton,
   StyledImage,
   StyledListItem,
-  StyledTypography,
+  Styled2LinesOverflowTypography,
 } from "./styles/components-styles";
 import DeleteDialog from "./delet-dialog";
 import { Tooltip } from "@mui/material";
@@ -47,19 +47,9 @@ const SongItem: FC<SongItemProps> = ({
     <StyledListItem key={song.spotifySongId}>
       <StyledImage src={song.albumCoverUrl} alt={song.name} />
       <Tooltip title={song.name} disableHoverListener={disabled}>
-        <StyledTypography
-          variant="subtitle1"
-          style={{
-            width: "160px",
-            display: "-webkit-box",
-            WebkitBoxOrient: "vertical",
-            WebkitLineClamp: 2, // Limit to 2 lines
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-          }}
-        >
+        <Styled2LinesOverflowTypography variant="subtitle1">
           {song.name}
-        </StyledTypography>
+        </Styled2LinesOverflowTypography>
       </Tooltip>
       <StyledVoteIconButton
         hasvote={hasVoted.toString()}
