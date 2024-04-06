@@ -128,7 +128,6 @@ const SearchSong: FC<SearchSongProps> = ({ addTrack, onSearch }) => {
 
   return (
     <div>
-      <StyledTypography variant="h6">Find your favorite songs</StyledTypography>
       <ClickAwayListener onClickAway={handleClickAway}>
         <div>
           <Autocomplete
@@ -139,7 +138,7 @@ const SearchSong: FC<SearchSongProps> = ({ addTrack, onSearch }) => {
             renderInput={(params) => (
               <TextField
                 {...params}
-                label="Search for a song"
+                label="Search for a song to add"
                 onChange={(e) => setQuery(e.target.value)}
                 sx={{
                   "& .MuiAutocomplete-inputRoot": {

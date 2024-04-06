@@ -1,5 +1,6 @@
 import axios from "axios";
 import { SpotifyTrackInfo } from "../constants/spotify";
+import { SongDto } from "../dto/song-dto";
 
 export async function addUser(
   spotifyId: string | undefined,
@@ -75,5 +76,17 @@ export async function removeSong(
 ) {
   await axios.delete(
     `${import.meta.env.VITE_TUNITY_SERVER_BASE_URL}/song/${playlistId}/${spotifySongId}`,
+  );
+}
+
+export async function vote(songDto: SongDto, userId: string) {
+  await axios.put(
+    `${import.meta.env.VITE_TUNITY_SERVER_BASE_URL}/song/vote/${userId}`, songDto
+  );
+}
+
+export async function unvote(songDto: SongDto, userId: string) {
+  await axios.delete(
+    `${import.meta.env.VITE_TUNITY_SERVER_BASE_URL}/song/unvote/${userId}`, {data: songDto}
   );
 }

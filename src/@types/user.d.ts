@@ -4,7 +4,7 @@ export interface IUser {
   email?: string;
   profileImage?: string | null;
   displayName?: string | null;
-  userId?: string;
+  userId: string;
 }
 
 export type UserContextType = {

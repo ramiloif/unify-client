@@ -1,6 +1,6 @@
 import DeleteIcon from "@mui/icons-material/Delete";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import { FC, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { SongDto } from "../dto/song-dto";
 import StyledVoteIconButton, {
   RightIconButton,
@@ -9,25 +9,29 @@ import StyledVoteIconButton, {
   Styled2LinesOverflowTypography,
 } from "./styles/components-styles";
 import DeleteDialog from "./delet-dialog";
-import { Tooltip } from "@mui/material";
+import { Tooltip, Typography } from "@mui/material";
+
 
 interface SongItemProps {
   song: SongDto;
   playlistId: string;
   onDelete: (playlistId: string, spotifyId: string) => void;
+  onVote: (SongDto: SongDto) => void;
   disabled: boolean;
+  userVoted: boolean;
 }
 const SongItem: FC<SongItemProps> = ({
   song,
   playlistId,
   onDelete,
   disabled,
+  onVote,
+  userVoted,
 }) => {
   const [isDialogOpen, setDialogOpen] = useState(false);
-  const [hasVoted, setHasVoted] = useState(false);
 
-  const handleVoteClick = () => {
-    setHasVoted((prev) => !prev);
+  const handleVoteClick = async () => {
+    onVote(song);
   };
 
   const handleDeleteClick = () => {
@@ -52,11 +56,14 @@ const SongItem: FC<SongItemProps> = ({
         </Styled2LinesOverflowTypography>
       </Tooltip>
       <StyledVoteIconButton
-        hasvote={hasVoted.toString()}
+        hasvote={userVoted.toString()}
         onClick={handleVoteClick}
         disabled={disabled}
       >
-        <ThumbUpIcon />
+        <ThumbUpIcon/>
+        <Typography component="span" sx={{ marginLeft: 1 }}>
+                {song?.voters.length || 0}
+            </Typography>
       </StyledVoteIconButton>
       <RightIconButton onClick={() => handleDeleteClick()} disabled={disabled}>
         <DeleteIcon />
